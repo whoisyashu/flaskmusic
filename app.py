@@ -3,8 +3,11 @@ import requests
 
 app = Flask(__name__)
 
-YOUTUBE_API_KEY = "AIzaSyCDdSKo8wARy2MfKT66hCvaJe5Npd5JjQE"
+YOUTUBE_API_KEY = "YOUR_YOUTUBE_API_KEY"
 YOUTUBE_SEARCH_URL = "https://www.googleapis.com/youtube/v3/search"
+
+# Default Sidhu Moosewala Song
+DEFAULT_SONG = "295 Sidhu Moosewala"
 
 @app.route("/")
 def index():
@@ -12,10 +15,8 @@ def index():
 
 @app.route("/search", methods=["GET"])
 def search():
-    query = request.args.get("q")
-    if not query:
-        return jsonify({"error": "Missing search query"}), 400
-    
+    query = request.args.get("q", DEFAULT_SONG)  # Use default song if no query
+
     params = {
         "part": "snippet",
         "q": query,
@@ -26,7 +27,7 @@ def search():
     response = requests.get(YOUTUBE_SEARCH_URL, params=params)
     data = response.json()
 
-    if "items" in data:
+    if "items" in data and data["items"]:
         video_id = data["items"][0]["id"]["videoId"]
         return jsonify({"videoId": video_id})
 
