@@ -3,7 +3,7 @@ import requests
 
 app = Flask(__name__)
 
-YOUTUBE_API_KEY = "YOUR_YOUTUBE_API_KEY"
+YOUTUBE_API_KEY = "AIzaSyCDdSKo8wARy2MfKT66hCvaJe5Npd5JjQE"
 YOUTUBE_SEARCH_URL = "https://www.googleapis.com/youtube/v3/search"
 
 # Default Sidhu Moosewala Song
