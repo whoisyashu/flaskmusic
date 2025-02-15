@@ -6,7 +6,6 @@
     <title>Flask Music</title>
 </head>
 <body>
-<<<<<<< HEAD
     <h1>Flask Music Player</h1>
     <input type="text" id="songInput" placeholder="Enter song name">
     <button onclick="searchSong()">Search</button>
@@ -28,13 +27,18 @@
                 })
                 .catch(error => console.error("Error:", error));
         }
+
+        // Auto-play Sidhu Moosewala song on page load
+        window.onload = function() {
+            fetch("/search")
+                .then(response => response.json())
+                .then(data => {
+                    if (data.videoId) {
+                        document.getElementById("youtube-player").src = `https://www.youtube.com/embed/${data.videoId}?autoplay=1`;
+                    }
+                })
+                .catch(error => console.error("Error:", error));
+        };
     </script>
-=======
-    <h1>Looping Audio Example</h1>
-    <audio controls autoplay loop>
-        <source src="{{ url_for('static', filename = 'Nature.mp3') }}" type="audio/mpeg">
-        Your browser does not support the audio tag.
-    </audio>
->>>>>>> origin/main
 </body>
 </html>
